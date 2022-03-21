@@ -1,4 +1,6 @@
 export default async function fetchMatchV5(req, res) {
+    console.log("Called MatchV5 API");
+
     const URL1 = "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/";
     const puuid = req.query.puuid;
     const URL2 = "/ids?start=0&count=5&api_key="

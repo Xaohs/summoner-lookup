@@ -1,4 +1,6 @@
 export default async function fetchSummonerV4(req, res) {
+    console.log("Called SummonerV4 API");
+
     const URL = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/";
     const summonerName = req.query.summonerName;
 
