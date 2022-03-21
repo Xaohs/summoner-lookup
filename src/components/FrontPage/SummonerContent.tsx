@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import { SummonerContentStyled } from "./FrontPage.styled";
 import useMatchHistory from "../Hooks/MatchFunctions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import MatchHistory from "../Hooks/MatchFunctions";
+import { match } from "assert";
 
 type Props = {
     matchData: any;
@@ -18,13 +19,28 @@ interface Match {
 
 }
 
+interface MatchHistoryData {
+
+}
+
 const SummonerContent = (props: Props) => {
-    const matchData: Match = props.matchData;
-    const summonerData: Summoner = props.summonerData;
-    
+    const matchData: Match = props.matchData.data;
+    const summonerData: Summoner = props.summonerData.data;
+
+    const [historyMainInfo, setHistoryMainInfo] = useState<MatchHistoryData | null>();
+
     useEffect(() => {
-        const matchHistory = MatchHistory(matchData, summonerData);
-    }, [matchData, summonerData])
+        const getMatchHistory = async () => {
+            return await MatchHistory(matchData);
+        }
+
+        getMatchHistory().then(response => setHistoryMainInfo(response));
+
+    }, [matchData])
+
+    useEffect(() => {
+        console.log(historyMainInfo);
+    }, [historyMainInfo])
 
     const summonerIcon = "/assets/dtail/12.5.1/img/profileicon/" + summonerData.profileIconId + ".png";
 

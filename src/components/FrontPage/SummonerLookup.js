@@ -5,42 +5,30 @@ import SummonerContent from "./SummonerContent";
 
 const SummonerLookup = () => {
 
-    /**
-     *
-     * @type {{summonerName: string}}
-     */
 
+    let dataSummoner;
+    let summonerName;
+    let dataMatch;
 
-    const [dataSummoner, setDataSummoner] = useState();
-    const [dataMatch, setDataMatch] = useState();
-    const [summonerName, setSummonerName] = useState();
+    const [stateSummoner, setStateSummoner] = useState();
+    const [stateMatch, setStateMatch] = useState();
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => setSummonerName(data.summonerName);
+    const onSubmit = async data => {
+        await fetchData(data);
+        setStateSummoner(dataSummoner);
+        setStateMatch(dataMatch);
+    }
 
-    useEffect(() => {
-        async function fetchSummonerData() {
-            return fetch(`api/fetchSummonerV4?summonerName=${ summonerName }`);
-        }
+    async function fetchData(data) {
 
-        if (summonerName) {
-            fetchSummonerData()
-                .then(response => response.json())
-                .then(data => setDataSummoner(data.data));
-        }
-    }, [summonerName]);
+        summonerName = data.summonerName;
 
-    useEffect(() => {
-        async function fetchMatchData() {
-            return fetch(`api/fetchMatchV5?puuid=${ dataSummoner.puuid }`);
-        }
+        dataSummoner = await fetch(`api/fetchSummonerV4?summonerName=${ summonerName }`).then(response => response.json());
 
-        if (dataSummoner) {
-            fetchMatchData()
-                .then(response => response.json())
-                .then(data => setDataMatch(data.data));
-        }
-    }, [dataSummoner])
+        dataMatch = await fetch(`api/fetchMatchV5?puuid=${ dataSummoner.data.puuid }`).then(response => response.json());
+
+    }
 
     return (
         <>
@@ -54,10 +42,10 @@ const SummonerLookup = () => {
                     </form>
                 </div>
             </FormStyled>
-            { dataMatch && dataSummoner ?
+            { stateMatch && stateSummoner ?
                 <SummonerContent
-                    summonerData={ dataSummoner }
-                    matchData={ dataMatch }
+                    summonerData={ stateSummoner }
+                    matchData={ stateMatch }
                 />
                 : null }
         </>
