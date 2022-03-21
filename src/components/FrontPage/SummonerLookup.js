@@ -1,18 +1,22 @@
 import { FormStyled } from "./FrontPage.styled";
 import React, { useEffect, useState } from "react";
-import getMatchHistory from '../Functions/MatchFunctions';
+import { useForm } from "react-hook-form";
+import SummonerContent from "./SummonerContent";
 
-const SummonerLookupInput = () => {
+const SummonerLookup = () => {
+
+    /**
+     *
+     * @type {{summonerName: string}}
+     */
+
 
     const [dataSummoner, setDataSummoner] = useState();
     const [dataMatch, setDataMatch] = useState();
     const [summonerName, setSummonerName] = useState();
 
-    let textInput = React.createRef();
-    const updateInput = (e) => {
-        e.preventDefault();
-        setSummonerName(textInput.current.value);
-    }
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = data => setSummonerName(data.summonerName);
 
     useEffect(() => {
         async function fetchSummonerData() {
@@ -38,39 +42,28 @@ const SummonerLookupInput = () => {
         }
     }, [dataSummoner])
 
-    useEffect(() => {
-        if (dataMatch) {
-            doStuff();
-        }
-    }, [dataMatch])
-
-    async function doStuff() {
-        const response = await getMatchHistory(dataMatch, dataSummoner);
-
-    }
-
     return (
         <>
             <FormStyled>
                 <div>
-                    <form>
-                        <input ref={ textInput } name="summonerName" placeholder="Summoner Name" id="summonerName"
-                               type="text" required/>
+                    <form onSubmit={ handleSubmit(onSubmit) }>
+                        <input { ...register("summonerName") } placeholder="Summoner Name" type="text" required/>
                         <label htmlFor="summonerName">Summoner Name</label>
-                        <button onClick={ updateInput } type="submit">Search</button>
+                        { errors.exampleRequired && <span>This field is required</span> }
+                        <button type="submit">Search</button>
                     </form>
                 </div>
             </FormStyled>
-            {/*{dataMatch && dataSummoner ?*/ }
-            {/*    <Data*/ }
-            {/*        dataSummoner={dataSummoner}*/ }
-            {/*        dataMatch={dataMatch}*/ }
-            {/*    />*/ }
-            {/*: null }*/ }
+            { dataMatch && dataSummoner ?
+                <SummonerContent
+                    summonerData={ dataSummoner }
+                    matchData={ dataMatch }
+                />
+                : null }
         </>
 
 
     )
 }
 
-export default SummonerLookupInput;
+export default SummonerLookup;

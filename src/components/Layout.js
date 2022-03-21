@@ -1,16 +1,16 @@
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
-import MainInfo from "./FrontPage/MainInfo";
-import {LayoutStyled} from "./LayoutStyled";
+import { LayoutStyled } from "./LayoutStyled";
+import SummonerLookup from "./FrontPage/SummonerLookup";
 
 
 export default function Layout() {
     return (
         <div>
             <Header/>
-            <LayoutStyled>
-                <MainInfo/>
-            </LayoutStyled>
+            {/*<LayoutStyled>*/ }
+            <SummonerLookup/>
+            {/*</LayoutStyled>*/ }
 
             <Footer/>
         </div>

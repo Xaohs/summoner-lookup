@@ -1,10 +1,30 @@
 import Image from 'next/image'
 import { SummonerContentStyled } from "./FrontPage.styled";
-import { getWinningTeam, useData } from "../Functions/MatchFunctions";
+import useMatchHistory from "../Hooks/MatchFunctions";
+import { useEffect } from "react";
+import MatchHistory from "../Hooks/MatchFunctions";
 
-const SummonerContent = (props) => {
-    const matchData = props.matchData;
-    const summonerData = props.summonerData;
+type Props = {
+    matchData: any;
+    summonerData: any;
+}
+
+interface Summoner {
+    profileIconId: number;
+    name: string;
+}
+
+interface Match {
+
+}
+
+const SummonerContent = (props: Props) => {
+    const matchData: Match = props.matchData;
+    const summonerData: Summoner = props.summonerData;
+    
+    useEffect(() => {
+        const matchHistory = MatchHistory(matchData, summonerData);
+    }, [matchData, summonerData])
 
     const summonerIcon = "/assets/dtail/12.5.1/img/profileicon/" + summonerData.profileIconId + ".png";
 
