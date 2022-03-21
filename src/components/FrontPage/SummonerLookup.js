@@ -4,15 +4,16 @@ import getMatchHistory from '../Functions/MatchFunctions';
 
 const SummonerLookupInput = () => {
 
-    const [dataSummoner, setDataSummoner] = useState(null);
-    const [dataMatch, setDataMatch] = useState(null);
-    const [summonerName, setSummonerName] = useState(null);
+    const [dataSummoner, setDataSummoner] = useState();
+    const [dataMatch, setDataMatch] = useState();
+    const [summonerName, setSummonerName] = useState();
 
     let textInput = React.createRef();
     const updateInput = (e) => {
         e.preventDefault();
         setSummonerName(textInput.current.value);
     }
+
     useEffect(() => {
         async function fetchSummonerData() {
             return fetch(`api/fetchSummonerV4?summonerName=${ summonerName }`);
@@ -36,6 +37,12 @@ const SummonerLookupInput = () => {
                 .then(data => setDataMatch(data.data));
         }
     }, [dataSummoner])
+
+    useEffect(() => {
+        if (dataMatch) {
+            doStuff();
+        }
+    }, [dataMatch])
 
     async function doStuff() {
         const response = await getMatchHistory(dataMatch, dataSummoner);
