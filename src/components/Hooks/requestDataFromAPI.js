@@ -19,7 +19,6 @@ export async function fetchMatch(dataPuuid) {
 
     const requestURL = URL1 + dataPuuid + URL2;
 
-
     return await fetch(`api/anyAPI?requestURL=${ requestURL }`).then(response => response.json());
 }
 

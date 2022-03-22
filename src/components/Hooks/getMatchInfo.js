@@ -59,6 +59,7 @@ export default async function MatchHistory(matchData) {
                 const gameCreation = timeAgo.format(Date.now() - ((matchHistory.gameCreation - (matchHistory.gameCreation % 10)) / 10 / 1000)); // idk
                 const gameDuration = getGameDuration(matchHistory.gameDuration);
                 const queueId = getQueueType(matchHistory.queueId);
+                // const gameId = jfdjfd;
 
                 return {
                     "mainInfo": {
@@ -69,18 +70,37 @@ export default async function MatchHistory(matchData) {
                 };
             }
 
-            const getParticipants = () => {
-                return {
-                    "participants": {
-                        "one": "Xaohs"
-                    }
-                };
+            const getParticipants = (matchHistory) => {
+                for (let j = 0; j === 9; j++) {
+                    const singleParticipant = matchHistory.participants[i];
+
+                    const assists = singleParticipant.assists;
+                    // const championId = singleParticipant.championId;
+                    // const assists = singleParticipant.assists;
+                    // const assists = singleParticipant.assists;
+                    // const assists = singleParticipant.assists;
+                    // const assists = singleParticipant.assists;
+                    // const assists = singleParticipant.assists;
+                    // const assists = singleParticipant.assists;
+                    // const assists = singleParticipant.assists;
+                    // const assists = singleParticipant.assists;
+                    // const assists = singleParticipant.assists;
+
+                    return {
+                        "participants": {
+                            "0": "Xaohs"
+                        }
+                    };
+                }
+
             }
 
-            return Object.assign(getMainInfo(matchHistory), getParticipants());
+            return Object.assign(getMainInfo(matchHistory), getParticipants(matchHistory));
         }
 
-        await fetchMatchList(matchData.data[i]).then(matchData => getInfo(matchData.data.data.info)).then(info => matchInfo.push(info));
+        await fetchMatchList(matchData.data[i])
+            .then(matchData => getInfo(matchData.data.data.info))
+            .then(info => matchInfo.push(info));
     }
 
     return matchInfo;
