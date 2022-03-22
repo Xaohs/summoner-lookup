@@ -21,12 +21,11 @@ const SummonerLookup = () => {
     }
 
     async function fetchData(data) {
-
         summonerName = data.summonerName;
 
         dataSummoner = await fetch(`api/fetchSummonerV4?summonerName=${ summonerName }`).then(response => response.json());
 
-        dataMatch = await fetch(`api/fetchMatchV5?puuid=${ dataSummoner.data.puuid }`).then(response => response.json());
+        dataMatch = await fetch(`api/fetchMatchV5?puuid=${ dataSummoner.puuid }`).then(response => response.json());
 
     }
 

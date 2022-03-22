@@ -1,25 +1,21 @@
+import cache from "memory-cache";
+
 export default async function fetchMatchList(req, res) {
-    console.log("Called Match List API");
-    
     const URL = "https://europe.api.riotgames.com/lol/match/v5/matches/";
     const matchID = req.query.matchID;
     const requestURL = URL + matchID + "?api_key=" + process.env.API_KEY;
 
-    try {
-        const responseData = await fetch(requestURL);
+    const cachedResponse = cache.get(requestURL);
 
-        if (!responseData.ok) {
-            return res.status(201).json({ message: "!ok" });
-            throw new Error("Something went wrong! Oops!");
-        }
-        if (responseData.ok) {
-            const data = await responseData.json();
-            return res.status(200).json({ data });
-        }
-    } catch (err) {
-        res.status(200).json({ message: "err" });
-        console.log(err);
-        return err;
+    if (cachedResponse) {
+        return res.status(200).json({ cachedResponse }.cachedResponse);
+    } else if (!cachedResponse) {
+        const hours = 24;
+        const requestData = await fetch(requestURL);
+        const responseData = await requestData.json();
+        cache.put(requestURL, responseData, hours * 1000 * 60 * 60);
+        console.log("Called Match List API");
+        return res.status(210).json({ responseData }.responseData);
     }
     return res.end();
 }

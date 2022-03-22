@@ -1,5 +1,6 @@
 import TimeAgo from "javascript-time-ago";
 import nl from 'javascript-time-ago/locale/nl.json'
+import axios from 'axios';
 
 function getGameDuration(seconds) {
     let minutes = Math.floor(seconds / 60);
@@ -47,31 +48,42 @@ function getQueueType(id) {
 
 
 export default async function MatchHistory(matchData) {
-
-    let history = [];
+    let allInfo = [];
     TimeAgo.addDefaultLocale(nl);
     const timeAgo = new TimeAgo('nl')
-
     for (let i = 0; i < matchData.length; i++) {
-        const getMainInfo = (matchHistory) => {
-            const gameCreation = timeAgo.format(Date.now() - ((matchHistory.info.gameCreation - (matchHistory.info.gameCreation % 10)) / 10 / 1000)); // idk
-            const gameDuration = getGameDuration(matchHistory.info.gameDuration);
-            const queueId = getQueueType(matchHistory.info.queueId);
+        const getInfo = (matchHistory) => {
+            console.log(matchHistory);
+            const getMainInfo = () => {
+                const gameCreation = timeAgo.format(Date.now() - ((matchHistory.gameCreation - (matchHistory.gameCreation % 10)) / 10 / 1000)); // idk
+                const gameDuration = getGameDuration(matchHistory.gameDuration);
+                const queueId = getQueueType(matchHistory.queueId);
 
-            history.push({
-                "gameCreation": { gameCreation },
-                "gameDuration": { gameDuration },
-                "queueType": { queueId }
-            });
+                return {
+                    "mainInfo": {
+                        "gameCreation": { gameCreation },
+                        "gameDuration": { gameDuration },
+                        "queueType": { queueId }
+                    }
+                };
+            }
 
+            const getParticipants = () => {
+                return {
+                    "participants": {
+                        "one": "Xaohs"
+                    }
+                };
+            }
+
+            return Object.assign(getMainInfo(matchHistory), getParticipants());
         }
 
-        const responseMatchList = await fetch(`api/fetchMatchList?matchID=${ matchData[i] }`);
-        await responseMatchList.json().then(result => getMainInfo(result.data));
+        axios.get(`api/fetchMatchList?matchID=${ matchData[i] }`).then(result => getInfo(result.data.info)).then(info => allInfo.push(info));
 
     }
 
-    return history;
+    return allInfo;
 
 }
 

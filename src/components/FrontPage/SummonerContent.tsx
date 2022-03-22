@@ -24,9 +24,8 @@ interface MatchHistoryData {
 }
 
 const SummonerContent = (props: Props) => {
-    const matchData: Match = props.matchData.data;
-    const summonerData: Summoner = props.summonerData.data;
-
+    const matchData: Match = props.matchData;
+    const summonerData: Summoner = props.summonerData;
     const [historyMainInfo, setHistoryMainInfo] = useState<MatchHistoryData | null>();
 
     useEffect(() => {
@@ -39,7 +38,9 @@ const SummonerContent = (props: Props) => {
     }, [matchData])
 
     useEffect(() => {
-        console.log(historyMainInfo);
+        if (historyMainInfo !== undefined) {
+            console.log(historyMainInfo);
+        }
     }, [historyMainInfo])
 
     const summonerIcon = "/assets/dtail/12.5.1/img/profileicon/" + summonerData.profileIconId + ".png";
