@@ -51,7 +51,9 @@ export default async function MatchHistory(matchData) {
     let matchInfo = [];
     TimeAgo.addDefaultLocale(nl);
     const timeAgo = new TimeAgo('nl')
+
     for (let i = 0; i < matchData.data.length; i++) {
+
         const getInfo = (matchHistory) => {
             const getMainInfo = () => {
                 const gameCreation = timeAgo.format(Date.now() - ((matchHistory.gameCreation - (matchHistory.gameCreation % 10)) / 10 / 1000)); // idk
