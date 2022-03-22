@@ -25,7 +25,7 @@ interface MatchHistoryData {
 
 const SummonerContent = (props: Props) => {
     const matchData: Match = props.matchData;
-    const summonerData: Summoner = props.summonerData;
+    const summonerData: Summoner = props.summonerData.data;
     const [historyMainInfo, setHistoryMainInfo] = useState<MatchHistoryData | null>();
 
     useEffect(() => {
