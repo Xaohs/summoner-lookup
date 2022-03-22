@@ -4,7 +4,7 @@ import axios from 'axios';
 export default async function fetchSummonerV4(req, res) {
     res.setHeader(
         'Cache-Control',
-        's-maxage=60, stale-while-revalidate=120'
+        's-maxage=31536000'
     )
 
     const URL = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/";

@@ -53,7 +53,6 @@ export default async function MatchHistory(matchData) {
     const timeAgo = new TimeAgo('nl')
     for (let i = 0; i < matchData.length; i++) {
         const getInfo = (matchHistory) => {
-            console.log(matchHistory);
             const getMainInfo = () => {
                 const gameCreation = timeAgo.format(Date.now() - ((matchHistory.gameCreation - (matchHistory.gameCreation % 10)) / 10 / 1000)); // idk
                 const gameDuration = getGameDuration(matchHistory.gameDuration);
