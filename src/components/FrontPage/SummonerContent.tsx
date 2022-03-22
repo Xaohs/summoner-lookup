@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import { SummonerContentStyled } from "./FrontPage.styled";
-import useMatchHistory from "../Hooks/MatchFunctions";
+import useMatchHistory from "../Hooks/getMatchInfo";
 import { useEffect, useState } from "react";
-import MatchHistory from "../Hooks/MatchFunctions";
+import MatchHistory from "../Hooks/getMatchInfo";
 import { match } from "assert";
 
 type Props = {

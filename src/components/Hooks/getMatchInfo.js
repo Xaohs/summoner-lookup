@@ -1,6 +1,6 @@
 import TimeAgo from "javascript-time-ago";
 import nl from 'javascript-time-ago/locale/nl.json'
-import axios from 'axios';
+import { fetchMatchList } from "./requestDataFromAPI";
 
 function getGameDuration(seconds) {
     let minutes = Math.floor(seconds / 60);
@@ -48,10 +48,10 @@ function getQueueType(id) {
 
 
 export default async function MatchHistory(matchData) {
-    let allInfo = [];
+    let matchInfo = [];
     TimeAgo.addDefaultLocale(nl);
     const timeAgo = new TimeAgo('nl')
-    for (let i = 0; i < matchData.length; i++) {
+    for (let i = 0; i < matchData.data.length; i++) {
         const getInfo = (matchHistory) => {
             const getMainInfo = () => {
                 const gameCreation = timeAgo.format(Date.now() - ((matchHistory.gameCreation - (matchHistory.gameCreation % 10)) / 10 / 1000)); // idk
@@ -78,11 +78,10 @@ export default async function MatchHistory(matchData) {
             return Object.assign(getMainInfo(matchHistory), getParticipants());
         }
 
-        axios.get(`api/fetchMatchList?matchID=${ matchData[i] }`).then(result => getInfo(result.data.info)).then(info => allInfo.push(info));
-
+        await fetchMatchList(matchData.data[i]).then(matchData => getInfo(matchData.data.data.info)).then(info => matchInfo.push(info));
     }
 
-    return allInfo;
+    return matchInfo;
 
 }
 
