@@ -1,6 +1,7 @@
 import TimeAgo from "javascript-time-ago";
 import nl from 'javascript-time-ago/locale/nl.json'
 import { fetchMatchList } from "./requestDataFromAPI";
+import { participantInfo } from "./participantInfo";
 
 function getGameDuration(seconds) {
     let minutes = Math.floor(seconds / 60);
@@ -71,27 +72,16 @@ export default async function MatchHistory(matchData) {
             }
 
             const getParticipants = (matchHistory) => {
-                for (let j = 0; j === 9; j++) {
-                    const singleParticipant = matchHistory.participants[i];
+                const singleParticipant = matchHistory.participants[i];
 
-                    const assists = singleParticipant.assists;
-                    // const championId = singleParticipant.championId;
-                    // const assists = singleParticipant.assists;
-                    // const assists = singleParticipant.assists;
-                    // const assists = singleParticipant.assists;
-                    // const assists = singleParticipant.assists;
-                    // const assists = singleParticipant.assists;
-                    // const assists = singleParticipant.assists;
-                    // const assists = singleParticipant.assists;
-                    // const assists = singleParticipant.assists;
-                    // const assists = singleParticipant.assists;
+                participantInfo(matchHistory.participants[i]);
+                const assists = singleParticipant.assists;
 
-                    return {
-                        "participants": {
-                            "0": "Xaohs"
-                        }
-                    };
-                }
+                return {
+                    "participants": {
+                        "0": "Xaohs"
+                    }
+                };
 
             }
 

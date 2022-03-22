@@ -15,7 +15,7 @@ export async function fetchSummonerName(typedSummonerName) {
 export async function fetchMatch(dataPuuid) {
 
     const URL1 = "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/";
-    const URL2 = encodeURIComponent("/ids?start=0&count=5&api_key=")
+    const URL2 = encodeURIComponent("/ids?start=0&count=20&api_key=")
 
     const requestURL = URL1 + dataPuuid + URL2;
 

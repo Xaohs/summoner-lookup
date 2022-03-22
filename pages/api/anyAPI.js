@@ -1,7 +1,7 @@
 export default async function fetchAPI(req, res) {
     try {
         const responseData = await fetch(req.query.requestURL + process.env.API_KEY);
-        console.log(req.query.requestURL);
+        console.log("requested");
         if (!responseData.ok) {
             return res.status(201).json({ message: "!ok" });
             throw new Error("Something went wrong! Oops!");

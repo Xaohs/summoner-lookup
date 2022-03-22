@@ -1,0 +1,39 @@
+Response {
+	Participants {
+		for Participants (0-9) {
+			assists: 8
+			championId: 6
+			deaths: 5
+			gameEndedInEarlySurrender: false
+			individualPosition: "TOP"
+			item0: 3075
+			item1: 3748
+			item2: 6662
+			item3: 3071
+			item4: 3111
+			item5: 3044
+			item6: 3340
+			kills: 10
+			lane: "TOP"
+			participantId: 1
+			profileIcon: 4
+			puuid: "RlLATLb2X4xe0j-ZQ5XftTnYyCWFrKEgdL4OjdJlq4r8x3fbTtHhHUOY1-M-FA1bQiidz-Nm_xqrww"
+			role: "SOLO"
+			summoner1Id: 4
+			summoner2Id: 12
+			summonerId: "wdS0J2HmYivdxjGxzeEDSo4XFX4PLZ3ZXUeqCfxrr9II_sFiNzYe-k6lvg"
+			summonerLevel: 30
+			summonerName: "Kinavayami"
+			teamId: 100
+			totalMinionsKilled: 181
+			visionScore: 42
+			win: true
+		}
+	}
+	Teams {
+		0-1 {
+			teamId: 100
+			win: false/true
+		}
+	}
+}
