@@ -8,9 +8,9 @@ export default function Layout() {
     return (
         <div>
             <Header/>
-            {/*<LayoutStyled>*/ }
-            <SummonerLookup/>
-            {/*</LayoutStyled>*/ }
+            <LayoutStyled>
+                <SummonerLookup/>
+            </LayoutStyled>
 
             <Footer/>
         </div>

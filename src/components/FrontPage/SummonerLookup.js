@@ -2,7 +2,7 @@ import { FormStyled } from "./FrontPage.styled";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import SummonerContent from "./SummonerContent";
-import { fetchMatch, fetchSummonerName } from '../Hooks/requestDataFromAPI'
+import { fetchMatch, fetchSummonerName } from '../GetData/requestDataFromAPI'
 
 const SummonerLookup = () => {
 

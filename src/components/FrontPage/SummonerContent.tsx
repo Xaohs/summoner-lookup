@@ -1,8 +1,9 @@
 import Image from 'next/image'
-import { SummonerContentStyled } from "./FrontPage.styled";
-import useMatchHistory from "../Hooks/getMatchInfo";
-import { useEffect, useState } from "react";
-import MatchHistory from "../Hooks/getMatchInfo";
+import { SummonerContentStyled, SummonerHeadersStyled } from "./FrontPage.styled";
+import useMatchHistory from "../GetData/getMatchInfo";
+import React, { useEffect, useState } from "react";
+import getMatchInfo from "../GetData/getMatchInfo";
+import MatchHistory from "./MatchHistory"
 import { match } from "assert";
 
 type Props = {
@@ -11,6 +12,8 @@ type Props = {
 }
 
 interface Summoner {
+    summonerLevel: number;
+    puuid: any;
     profileIconId: number;
     name: string;
 }
@@ -26,31 +29,33 @@ interface MatchHistoryData {
 const SummonerContent = (props: Props) => {
     const matchData: Match = props.matchData;
     const summonerData: Summoner = props.summonerData.data;
-    const [historyMainInfo, setHistoryMainInfo] = useState<MatchHistoryData | null>();
+    const [matchHistoryState, setMatchHistoryState] = useState<MatchHistoryData | null>();
 
     useEffect(() => {
         const getMatchHistory = async () => {
-            return await MatchHistory(matchData);
+            return await getMatchInfo(matchData);
         }
 
-        getMatchHistory().then(response => setHistoryMainInfo(response));
+        getMatchHistory().then(response => setMatchHistoryState(response));
 
     }, [matchData])
-
-    useEffect(() => {
-        if (historyMainInfo !== undefined) {
-            console.log(historyMainInfo);
-        }
-    }, [historyMainInfo])
 
     const summonerIcon = "/assets/dtail/12.5.1/img/profileicon/" + summonerData.profileIconId + ".png";
 
     return (
         <SummonerContentStyled>
-            <div>
-                <Image src={ summonerIcon } alt="Profile Icon" height="50px" width="50px"/>
+            <SummonerHeadersStyled>
                 <h1>{ summonerData.name }</h1>
-            </div>
+                <span id="yep">{ summonerData.summonerLevel }</span>
+                <Image src={ summonerIcon } alt="Profile Icon" height="90" width="90px"/>
+            </SummonerHeadersStyled>
+
+            { matchHistoryState ?
+                <MatchHistory
+                    matchHistory={ matchHistoryState }
+                    puuid={ summonerData.puuid }
+                />
+                : null }
         </SummonerContentStyled>
     )
 }
