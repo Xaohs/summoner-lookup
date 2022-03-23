@@ -72,10 +72,10 @@ export default async function MatchHistory(matchData) {
             }
 
             const getParticipants = (matchHistory) => {
-                const singleParticipant = matchHistory.participants[i];
-
-                participantInfo(matchHistory.participants[i]);
-                const assists = singleParticipant.assists;
+                // const singleParticipant = matchHistory.participants[i];
+                //
+                // participantInfo(matchHistory.participants[i]);
+                // const assists = singleParticipant.assists;
 
                 return {
                     "participants": {
