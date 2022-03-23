@@ -4,7 +4,6 @@ import React from "react";
 import EachParticipant from "../MatchHistoryData/EachParticipant";
 
 const MatchHistory = (props) => {
-    console.log(props.matchHistory);
 
     return (
 
