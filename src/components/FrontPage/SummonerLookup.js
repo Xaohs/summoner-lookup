@@ -33,7 +33,7 @@ const SummonerLookup = () => {
 
     return (
         <>
-            <Loading loading={ isLoading }/>
+            <Loading loading={ isLoading } where="loadingSummonerData"/>
             <FormStyled>
                 <div>
                     <form onSubmit={ handleSubmit(onSubmit) }>

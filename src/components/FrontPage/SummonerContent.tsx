@@ -47,7 +47,7 @@ const SummonerContent = (props: Props) => {
 
     return (
         <SummonerContentStyled>
-            <Loading loading={isLoading}/>
+            <Loading loading={isLoading} where="loadingMatchHistory"/>
             <SummonerHeadersStyled>
                 <h1>{ summonerData.name }</h1>
                 <span id="yep">{ summonerData.summonerLevel }</span>

@@ -1,10 +1,18 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import loading from "./Loading";
 
-export const LoadingStyled = styled.div`
-position: absolute;
+export const LoadingStyled = styled.div(
+(props) => css`
+  position: absolute;
+  
   .dot-revolution {
     position: relative;
-    margin: 100px 0 0 500px;
+    ${props.where === "loadingSummonerData" && css`
+        margin: 150px 0 0 50px;
+    `}
+    ${props.where === "loadingMatchHistory" && css`
+        margin: 200px 0 0 500px;
+    `}
     width: 15px;
     height: 15px;
     border-radius: 7.5px;
@@ -51,5 +59,5 @@ position: absolute;
       transform: rotateZ(360deg) translate3d(0, 0, 0);
     }
   }
-
 `
+    );

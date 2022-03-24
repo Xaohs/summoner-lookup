@@ -15,7 +15,7 @@ const Loading = (props) => {
 
     return (
 
-        <LoadingStyled>
+        <LoadingStyled where={props.where}>
             { loading ?
                 <div className="col-3">
                     <div className="snippet" data-title=".dot-revolution">
