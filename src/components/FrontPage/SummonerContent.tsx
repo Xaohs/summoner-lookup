@@ -3,8 +3,9 @@ import { SummonerContentStyled, SummonerHeadersStyled } from "./FrontPage.styled
 import useMatchHistory from "../GetData/getMatchInfo";
 import React, { useEffect, useState } from "react";
 import getMatchInfo from "../GetData/getMatchInfo";
-import MatchHistory from "./MatchHistory"
+import MatchHistory from "../MatchHistoryData/MatchHistory"
 import { match } from "assert";
+import Loading from '../Loading/Loading';
 
 type Props = {
     matchData: any;
@@ -30,13 +31,15 @@ const SummonerContent = (props: Props) => {
     const matchData: Match = props.matchData;
     const summonerData: Summoner = props.summonerData.data;
     const [matchHistoryState, setMatchHistoryState] = useState<MatchHistoryData | null>();
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        setIsLoading(true);
         const getMatchHistory = async () => {
             return await getMatchInfo(matchData);
         }
 
-        getMatchHistory().then(response => setMatchHistoryState(response));
+        getMatchHistory().then(response => setMatchHistoryState(response)).then(response => setIsLoading(false));
 
     }, [matchData])
 
@@ -44,6 +47,7 @@ const SummonerContent = (props: Props) => {
 
     return (
         <SummonerContentStyled>
+            { isLoading && <Loading/> }
             <SummonerHeadersStyled>
                 <h1>{ summonerData.name }</h1>
                 <span id="yep">{ summonerData.summonerLevel }</span>

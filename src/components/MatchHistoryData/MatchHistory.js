@@ -1,4 +1,4 @@
-import { EachMatchStyled, MatchHistoryStyled } from "./FrontPage.styled";
+import { EachMatchStyled, MatchHistoryStyled } from "./MatchHistoryData.styled";
 import Image from "next/image";
 import React from "react";
 import EachParticipant from "../MatchHistoryData/EachParticipant";
