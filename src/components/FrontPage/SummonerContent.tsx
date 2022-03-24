@@ -34,7 +34,6 @@ const SummonerContent = (props: Props) => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        setIsLoading(true);
         const getMatchHistory = async () => {
             return await getMatchInfo(matchData);
         }
@@ -42,6 +41,10 @@ const SummonerContent = (props: Props) => {
         getMatchHistory().then(response => setMatchHistoryState(response)).then(response => setIsLoading(false));
 
     }, [matchData])
+
+    useEffect(() => {
+        setIsLoading(true);
+    }, [summonerData, matchData])
 
     const summonerIcon = "/assets/dtail/12.5.1/img/profileicon/" + summonerData.profileIconId + ".png";
 
