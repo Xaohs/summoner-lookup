@@ -1,15 +1,16 @@
 import styled from 'styled-components'
 
 export const LoadingStyled = styled.div`
-
+position: absolute;
   .dot-revolution {
     position: relative;
-    margin: auto;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
+    margin: 100px 0 0 500px;
+    width: 15px;
+    height: 15px;
+    border-radius: 7.5px;
     background-color: #9880ff;
     color: #9880ff;
+    z-index: 1;
   }
 
   .dot-revolution::before, .dot-revolution::after {
@@ -20,25 +21,25 @@ export const LoadingStyled = styled.div`
 
   .dot-revolution::before {
     left: 0;
-    top: -15px;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
+    top: -22.5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 7.5px;
     background-color: #9880ff;
     color: #9880ff;
-    transform-origin: 5px 20px;
+    transform-origin: 7.5px 30px;
     animation: dotRevolution 1.4s linear infinite;
   }
 
   .dot-revolution::after {
     left: 0;
-    top: -30px;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
+    top: -45px;
+    width: 15px;
+    height: 15px;
+    border-radius: 7.5px;
     background-color: #9880ff;
     color: #9880ff;
-    transform-origin: 5px 35px;
+    transform-origin: 7.5px 50px;
     animation: dotRevolution 1s linear infinite;
   }
 
