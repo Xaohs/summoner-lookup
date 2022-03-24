@@ -16,6 +16,7 @@ const Loading = (props) => {
     return (
 
         <LoadingStyled>
+            { loading ?
                 <div className="col-3">
                     <div className="snippet" data-title=".dot-revolution">
                         <div className="stage">
@@ -23,6 +24,7 @@ const Loading = (props) => {
                         </div>
                     </div>
                 </div>
+                : null }
         </LoadingStyled>
 
     );
