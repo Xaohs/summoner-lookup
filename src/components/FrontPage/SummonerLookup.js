@@ -17,11 +17,15 @@ const SummonerLookup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = async typedSummonerName => {
         setIsLoading(true);
-        await fetchSummonerName(typedSummonerName)
-            .then(resSummoner => dataSummoner = resSummoner)
-            .then(async dataSummoner => await fetchMatch(dataSummoner.data.puuid))
-            .then(resMatch => dataMatch = resMatch)
-
+        try {
+            await fetchSummonerName(typedSummonerName)
+                .then(resSummoner => dataSummoner = resSummoner)
+                .then(async dataSummoner => await fetchMatch(dataSummoner.data.puuid))
+                .then(resMatch => dataMatch = resMatch)
+                .then(resMatch => setIsLoading(false))
+        } catch (err) {
+            console.log(err);
+        }
         setSummoner(dataSummoner);
         setMatch(dataMatch);
 

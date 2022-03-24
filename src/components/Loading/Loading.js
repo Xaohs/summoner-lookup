@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { LoadingStyled } from './Loading.styled'
 
 const Loading = (props) => {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function yep() {
-            setLoading(!loading ? false : true)
+            setLoading(props.loading)
         }
 
         yep().then(response => console.log(loading));
