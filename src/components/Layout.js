@@ -4,14 +4,16 @@ import { LayoutStyled } from "./LayoutStyled";
 import SummonerLookup from "./FrontPage/SummonerLookup";
 
 
-export default function Layout() {
+export default function Layout({ children }) {
     return (
         <div>
             <Header/>
             <LayoutStyled>
-                <SummonerLookup/>
+                { children }
+                <div>
+                    <SummonerLookup/>
+                </div>
             </LayoutStyled>
-
             <Footer/>
         </div>
     )
