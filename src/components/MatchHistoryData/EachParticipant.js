@@ -1,5 +1,5 @@
 import React from "react";
-import { RequestedNameInfoStyled } from "./MatchHistoryData.styled";
+import { RequestedNameInfoStyled } from "../../styles/MatchHistoryData.styled";
 import Image from 'next/image';
 
 const EachParticipant = (props) => {

@@ -1,5 +1,8 @@
-html,
-body {
+import { createGlobalStyle } from "styled-components";
+
+export const GlobalStyle = createGlobalStyle`
+  html,
+  body {
     padding: 0;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -7,13 +10,14 @@ body {
     color: #DECCCC;
     background-color: #1B2845;
     min-height: 100%;
-}
+  }
 
-a {
+  a {
     color: inherit;
     text-decoration: none;
-}
+  }
 
-* {
+  * {
     box-sizing: border-box;
-}
+  }
+`;

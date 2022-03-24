@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { LoadingStyled } from './Loading.styled'
+import { LoadingStyled } from '../../styles/Loading.styled'
 
 const Loading = (props) => {
     const [loading, setLoading] = useState(false);
@@ -15,7 +15,7 @@ const Loading = (props) => {
 
     return (
 
-        <LoadingStyled where={props.where}>
+        <LoadingStyled where={ props.where }>
             { loading ?
                 <div className="col-3">
                     <div className="snippet" data-title=".dot-revolution">

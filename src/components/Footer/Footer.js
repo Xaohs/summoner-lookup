@@ -1,4 +1,4 @@
-import { FooterStyled } from "./Footer.styled";
+import { FooterStyled } from "../../styles/Footer.styled";
 
 
 export default function Footer() {

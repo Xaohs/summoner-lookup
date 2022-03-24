@@ -1,8 +1,6 @@
-import { EachMatchStyled, MatchHistoryStyled } from "./MatchHistoryData.styled";
-import Image from "next/image";
-import React, { useState } from "react";
+import { EachMatchStyled, MatchHistoryStyled } from "../../styles/MatchHistoryData.styled";
+import React from "react";
 import EachParticipant from "../MatchHistoryData/EachParticipant";
-import Loading from "../Loading/Loading";
 
 const MatchHistory = (props) => {
 

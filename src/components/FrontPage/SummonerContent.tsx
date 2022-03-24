@@ -1,10 +1,8 @@
 import Image from 'next/image'
-import { SummonerContentStyled, SummonerHeadersStyled } from "./FrontPage.styled";
-import useMatchHistory from "../GetData/getMatchInfo";
-import React, { useEffect, useState } from "react";
+import { SummonerContentStyled, SummonerHeadersStyled } from '../../styles/FrontPage.styled'
 import getMatchInfo from "../GetData/getMatchInfo";
+import React, { useEffect, useState } from "react";
 import MatchHistory from "../MatchHistoryData/MatchHistory"
-import { match } from "assert";
 import Loading from '../Loading/Loading';
 
 type Props = {
@@ -47,7 +45,7 @@ const SummonerContent = (props: Props) => {
 
     return (
         <SummonerContentStyled>
-            <Loading loading={isLoading} where="loadingMatchHistory"/>
+            <Loading loading={ isLoading } where="loadingMatchHistory"/>
             <SummonerHeadersStyled>
                 <h1>{ summonerData.name }</h1>
                 <span id="yep">{ summonerData.summonerLevel }</span>

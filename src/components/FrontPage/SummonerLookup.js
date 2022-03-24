@@ -1,5 +1,5 @@
-import { FormStyled } from "./FrontPage.styled";
-import React, { useEffect, useState } from "react";
+import { FormStyled } from "../../styles/FrontPage.styled";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import SummonerContent from "./SummonerContent";
 import { fetchMatch, fetchSummonerName } from '../GetData/requestDataFromAPI'
