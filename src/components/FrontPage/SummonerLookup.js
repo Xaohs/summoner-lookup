@@ -3,30 +3,33 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import SummonerContent from "./SummonerContent";
 import { fetchMatch, fetchSummonerName } from '../GetData/requestDataFromAPI'
+import Loading from "../Loading/Loading";
 
 const SummonerLookup = () => {
-
 
     let dataSummoner;
     let dataMatch;
 
     const [stateMatch, setMatch] = useState();
     const [stateSummoner, setSummoner] = useState();
+    const [isLoading, setIsLoading] = useState(false);
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = async typedSummonerName => {
+        setIsLoading(true);
         await fetchSummonerName(typedSummonerName)
             .then(resSummoner => dataSummoner = resSummoner)
             .then(async dataSummoner => await fetchMatch(dataSummoner.data.puuid))
-            .then(resMatch => dataMatch = resMatch);
+            .then(resMatch => dataMatch = resMatch)
 
         setSummoner(dataSummoner);
         setMatch(dataMatch);
 
     }
 
-
     return (
         <>
+            <Loading loading={ isLoading }/>
             <FormStyled>
                 <div>
                     <form onSubmit={ handleSubmit(onSubmit) }>
@@ -48,5 +51,6 @@ const SummonerLookup = () => {
 
     )
 }
+
 
 export default SummonerLookup;

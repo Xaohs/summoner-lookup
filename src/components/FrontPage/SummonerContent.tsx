@@ -31,26 +31,20 @@ const SummonerContent = (props: Props) => {
     const matchData: Match = props.matchData;
     const summonerData: Summoner = props.summonerData.data;
     const [matchHistoryState, setMatchHistoryState] = useState<MatchHistoryData | null>();
-    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const getMatchHistory = async () => {
             return await getMatchInfo(matchData);
         }
 
-        getMatchHistory().then(response => setMatchHistoryState(response)).then(response => setIsLoading(false));
+        getMatchHistory().then(response => setMatchHistoryState(response));
 
     }, [matchData])
-
-    useEffect(() => {
-        setIsLoading(true);
-    }, [summonerData, matchData])
 
     const summonerIcon = "/assets/dtail/12.5.1/img/profileicon/" + summonerData.profileIconId + ".png";
 
     return (
         <SummonerContentStyled>
-            { isLoading && <Loading/> }
             <SummonerHeadersStyled>
                 <h1>{ summonerData.name }</h1>
                 <span id="yep">{ summonerData.summonerLevel }</span>

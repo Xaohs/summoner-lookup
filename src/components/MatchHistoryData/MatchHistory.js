@@ -2,6 +2,7 @@ import { EachMatchStyled, MatchHistoryStyled } from "./MatchHistoryData.styled";
 import Image from "next/image";
 import React from "react";
 import EachParticipant from "../MatchHistoryData/EachParticipant";
+import Loading from "../Loading/Loading";
 
 const MatchHistory = (props) => {
 
@@ -21,10 +22,9 @@ const MatchHistory = (props) => {
                         eachMatch={ eachMatch }
                         puuid={ props.puuid }
                     />
-
                 </EachMatchStyled>
             ) }
-
+            <Loading loading={ false }/>
         </MatchHistoryStyled>
     )
 }
