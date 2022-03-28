@@ -3,7 +3,6 @@ import Footer from "./Footer/Footer";
 import { LayoutStyled } from "./LayoutStyled";
 import SummonerLookup from "./FrontPage/SummonerLookup";
 
-
 export default function Layout({ children }) {
     return (
         <div>
