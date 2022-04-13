@@ -6,7 +6,7 @@ export async function fetchSummonerName(typedSummonerName) {
 
     const requestURL = URL + summonerName + "?api_key=";
 
-
+    await test();
     return await fetch(`api/anyAPI?requestURL=${ requestURL }`).then(response => response.json());
 
 

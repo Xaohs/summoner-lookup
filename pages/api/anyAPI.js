@@ -1,16 +1,14 @@
 var summonerCount = 0;
 var matchCount = 0;
 var matchListCount = 0;
+
+
 export default async function fetchAPI(req, res) {
     let splittedRequest = req.query.requestURL.split("/")
 
 
     if (splittedRequest.includes("summoner")) {
         summonerCount++
-        res.setHeader(
-            'Cache-Control',
-            'public, max-age=31536000, immutable'
-        )
         console.log("Called the Summoner V4 API for the " + summonerCount + " time");
     } else if (splittedRequest.includes("by-puuid")) {
         matchListCount++
