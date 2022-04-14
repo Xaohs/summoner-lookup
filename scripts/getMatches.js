@@ -1,45 +1,52 @@
 const https = require('https')
 const fs = require("fs");
+const { MongoClient } = require('mongoDB');
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-const startPuuid = "KgnJg_93ZVS9nLxt7C1A-T4d7esZSM75z1azewi3Eh_USHssfdO9XO97Vy8uqqkOjtdeuCQtF4-b0w"
+
+const startPuuid = "bCOHVQownVUZXWbAtlpvguXV1CpuuEz9JkZIs24Hzdaw6pJtkzIYIFhAR-cKBdqBgDI2RmdtV0QSiA"
 const URL1 = "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/";
-const URL2 = "/ids?start=0&count=100&api_key=RGAPI-1b1f3866-5024-4979-903d-9220a6ba6af3"
-
+const URL2 = "/ids?start=0&count=6&api_key=RGAPI-d32ad46c-1ced-4cf2-9359-79b2125212b0"
 const requestURL = URL1 + startPuuid + URL2;
 
 
-https.get(requestURL, res => {
-    let data = '';
-    res.on('data', chunk => {
-        data += chunk;
-    });
-    res.on('end', () => {
-        data = JSON.parse(data);
-        parseData(data);
-    })
-}).on('error', err => {
-    console.log(err.message);
-})
+const main = async () => {
+    const matchIDs = JSON.parse(await getMatchIDs(requestURL));
+    await parseData(matchIDs);
+}
 
-function parseData(data) {
-    append_data('scripts/summonerData.json', data)
+main()
+
+async function getMatchIDs(URL) {
+    const xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", URL, false);
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
+}
+
+async function parseData(data) {
+    await append_data('summonerData.json', data)
 
     async function append_data(filename, data) {
-        if (fs.existsSync(filename)) {
+        if (!fs.existsSync(filename)) return;
 
-            const read_data = await readFile(filename);
-            if (read_data === false) {
-                console.log('not able to read file')
+        const read_data = await readFile(filename);
+
+        if (read_data === false) return console.log('not able to read file');
+
+        data.forEach(id => {
+            if (!read_data.table.includes(id)) {
+                read_data.table.push(id);
+
+                const dataWrittenStatus = writeFile(filename, read_data);
+                if (dataWrittenStatus === true) console.log('data added successfully');
+
             } else {
-                read_data.table.push(data)  //data must have the table array in it like example 1
-                const dataWrittenStatus = await writeFile(filename, read_data);
-                if (dataWrittenStatus === true) {
-                    console.log('data added successfully')
-                } else {
-                    console.log('data adding failed')
-                }
+                console.log('Data is already Added')
             }
-        }
+        });
+
+
     }
 
     async function readFile(filePath) {
